@@ -1,19 +1,15 @@
-// document.getElementById('convert').addEventListener('click', function() {
-//     convertToBionicPage();
-//     // chrome.tabs.executeScript({
-//     //   file: 'content.js'
-//     // });
-//   });
-document.getElementById('convert').addEventListener('click', function() {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.scripting.executeScript({
-            target: {tabId: tabs[0].id},
-            func: convertToBionicPage
+chrome.commands.onCommand.addListener(function(command) {
+    if (command === "convert_to_bionic") {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.scripting.executeScript({
+                target: {tabId: tabs[0].id},
+                func: convertToBionicPage
+            });
         });
-    });
+    }
 });
 
-  function convertToBionicPage() {
+function convertToBionicPage() {
     function convertToBionic(text) {
         if (typeof text == "string") {
             let words = text.split(' ');
@@ -47,5 +43,3 @@ document.getElementById('convert').addEventListener('click', function() {
 
     processNode(document.body);
 }
-
-// convertToBionicPage();

@@ -12,12 +12,18 @@
     },
     "default_popup": "popup.html"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+  "commands": {
+    "convert_to_bionic": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "MacCtrl+Shift+B"
+      },
+      "description": "Convert to Bionic Text"
     }
-  ],
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
   "icons": {
     "48": "icon.png",
     "128": "icon.png",
